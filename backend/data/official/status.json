@@ -74,5 +74,28 @@
       "newData": true,
       "lastNewDataAt": "2026-11-25T14:55:51.237Z"
     }
+  },
+  "moa_hog": {
+    "scheduled": {
+      "httpStatus": 200,
+      "bytes": 15719605,
+      "trigger": "workflow_dispatch",
+      "lastAttemptAt": "2026-11-25T14:56:45.120Z",
+      "lastSuccessAt": "2026-11-25T14:56:45.120Z",
+      "lastError": null,
+      "latestDate": "2026-11-25",
+      "lastRawFile": "raw/moa_hog/2026-11-25/2026-11-25T145645120Z-aaaa953244f3.json",
+      "lastCounts": {
+        "rows": 9999,
+        "parsed": 37079,
+        "inWindow": 3557,
+        "inserted": 3557,
+        "changed": 0,
+        "unchanged": 0,
+        "updated": 0
+      },
+      "newData": true,
+      "lastNewDataAt": "2026-11-25T14:56:45.120Z"
+    }
   }
 }
