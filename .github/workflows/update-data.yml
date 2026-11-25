@@ -38,3 +38,10 @@ jobs:
           git config user.name 'jcj-bot'; git config user.email 'jcj-bot@users.noreply.github.com'
           git add backend/data/official/records.json backend/data/official/status.json backend/data/official/last-run.json backend/data/official/sample.json app/www/data/official.json
           if git diff --cached --quiet; then echo '資料沒有變動' | tee -a "$GITHUB_STEP_SUMMARY"; else git commit -m "data: $(date +%F_%H%M) (${{ github.event_name }})" && git pull --rebase && git push; fi
+      - name: 判定（所有要求的來源都抓取失敗時，讓這次執行顯示失敗）
+        run: |
+          node -e "
+            const r=require('./backend/data/official/last-run.json');
+            const ok=r.sources.filter(s=>s.ok), bad=r.sources.filter(s=>!s.ok);
+            for (const s of r.sources) console.log(s.id, s.ok?'OK':'FAIL', s.http??'-', s.verdict||s.error);
+            if (!ok.length) { console.error('全部來源失敗'); process.exit(1); }"

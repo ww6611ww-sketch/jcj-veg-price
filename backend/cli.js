@@ -102,11 +102,16 @@ async function main() {
     const rec = store.all().filter(r => r.source === args.source && r.market === args.market && r.itemId === args.item && !r.excluded)
       .sort((a, b) => b.date.localeCompare(a.date))[0];
     if (!rec) { console.log('找不到對應原始報價'); return; }
-    let rawText = null; try { rawText = fs.readFileSync(path.join(DATA, 'official', rec.rawFile), 'utf8'); } catch {}
+    // 原始檔：先找該筆紀錄首次取得的檔案；不在本機時（例如 CI），改用本次抓取的原始檔，並確認同市場同日同品項的值一致
+    const st = store.status[args.source] || {};
+    let rawText = null, rawUsed = null;
+    for (const f of [rec.rawFile, st.scheduled?.lastRawFile, st.manual?.lastRawFile].filter(Boolean)) {
+      try { rawText = fs.readFileSync(path.join(DATA, 'official', f), 'utf8'); rawUsed = f; break; } catch {}
+    }
     const rawRow = rawText && JSON.parse(rawText.replace(/^\uFEFF/, '')).find?.(x => x['市場名稱'] === rec.market && String(x['訪價日期']).replace(/\D/g, '') === rec.date.replace(/-/g, ''));
     const local = JSON.parse(fs.readFileSync(path.join(APP_OUT, 'official.json'), 'utf8'));
     const pick = d => d.quotes.find(q => q.m === rec.market && q.i === rec.itemId && q.d === rec.date);
-    const out = { rawNote: rawText ? undefined : `原始檔 ${rec.rawFile} 不在本機（存於該次執行的 artifact）`, raw: rawRow ? { 市場名稱: rawRow['市場名稱'], 訪價日期: rawRow['訪價日期'], [rec.rawItemName]: rawRow[rec.rawItemName] ?? rawRow[Object.keys(rawRow).find(k => k.replace(/（/g, '(').replace(/）/g, ')') === rec.rawItemName)] } : null,
+    const out = { rawFile: rawUsed, rawNote: rawText ? undefined : `原始檔 ${rec.rawFile} 不在本機（存於該次執行的 artifact）`, raw: rawRow ? { 市場名稱: rawRow['市場名稱'], 訪價日期: rawRow['訪價日期'], [rec.rawItemName]: rawRow[rec.rawItemName] ?? rawRow[Object.keys(rawRow).find(k => k.replace(/（/g, '(').replace(/）/g, ')') === rec.rawItemName)] } : null,
       stored: { date: rec.date, price: rec.price, rawUnit: rec.rawUnit, fetchedAt: rec.fetchedAt, via: rec.via, rawFile: rec.rawFile },
       appData: (q => q && { 元每台斤: +(q.k * 0.6).toFixed(2), 元每公斤: +q.k.toFixed(2), 資料日: q.d })(pick(local)) };
     if (args.url) { const web = await (await fetch(args.url, { cache: 'no-store' })).json(); out.deployed = (q => q && { 元每台斤: +(q.k * 0.6).toFixed(2), 資料日: q.d, generatedAt: web.generatedAt })(pick(web)); }
