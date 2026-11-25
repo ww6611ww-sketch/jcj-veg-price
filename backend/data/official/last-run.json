@@ -1,104 +1,35 @@
 {
-  "runAt": "2026-11-25T15:04:20.834Z",
+  "runAt": "2026-11-25T15:05:08.223Z",
   "trigger": "workflow_dispatch",
   "taipeiDate": "2026-11-25",
   "keepFrom": "2026-09-27",
   "sources": [
     {
-      "id": "moa_fish",
-      "name": "漁產品批發交易行情",
-      "url": "https://data.moa.gov.tw/Service/OpenData/FromM/AquaticTransData.aspx",
+      "id": "moa_hog",
+      "name": "毛豬交易行情",
+      "url": "https://data.moa.gov.tw/Service/OpenData/FromM/AnimalTransData.aspx",
       "http": 200,
-      "bytes": 2473642,
+      "bytes": 15719605,
       "ok": true,
       "contentType": "application/json; charset=utf-8",
       "rows": 9999,
-      "parsed": 841,
-      "inWindow": 841,
+      "parsed": 37079,
+      "inWindow": 3557,
       "inserted": 0,
       "changed": 0,
-      "unchanged": 841,
+      "unchanged": 3557,
       "latestBefore": "2026-11-25",
       "latestInFile": "2026-11-25",
       "latestAfter": "2026-11-25",
       "newData": false,
       "excluded": 0,
-      "flaggedGroups": 1,
-      "rawFile": "raw/moa_fish/2026-11-25/2026-11-25T150420834Z-17747886af76.json",
-      "duplicatesMerged": 63,
-      "duplicateExamples": [
-        {
-          "date": "2026-11-25",
-          "market": "桃園",
-          "item": "午仔魚",
-          "prices": [
-            155.7,
-            360
-          ],
-          "volumes": [
-            1022,
-            22
-          ],
-          "merged": 160.01
-        },
-        {
-          "date": "2026-11-25",
-          "market": "彰化",
-          "item": "午仔魚",
-          "prices": [
-            165.1,
-            90.5
-          ],
-          "volumes": [
-            566.6,
-            64
-          ],
-          "merged": 157.53
-        },
-        {
-          "date": "2026-11-25",
-          "market": "台中",
-          "item": "午仔魚",
-          "prices": [
-            152.5,
-            131.8
-          ],
-          "volumes": [
-            2896.1,
-            146.8
-          ],
-          "merged": 151.5
-        },
-        {
-          "date": "2026-11-25",
-          "market": "台北",
-          "item": "午仔魚",
-          "prices": [
-            132.5,
-            212.1
-          ],
-          "volumes": [
-            826.1,
-            767.6
-          ],
-          "merged": 170.84
-        },
-        {
-          "date": "2026-11-25",
-          "market": "埔心",
-          "item": "午仔魚",
-          "prices": [
-            223.3,
-            150.5
-          ],
-          "volumes": [
-            0.6,
-            827.1
-          ],
-          "merged": 150.55
-        }
+      "flaggedGroups": 0,
+      "rawFile": "raw/moa_hog/2026-11-25/2026-11-25T150508223Z-aaaa953244f3.json",
+      "duplicatesMerged": 0,
+      "duplicateExamples": [],
+      "unmappedMarkets": [
+        "澎湖縣"
       ],
-      "unmappedMarkets": [],
       "verdict": "抓取成功，來源沒有新資料"
     }
   ],
