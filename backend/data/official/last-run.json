@@ -1,34 +1,38 @@
 {
-  "runAt": "2026-11-25T15:17:38.971Z",
+  "runAt": "2026-11-25T15:18:30.207Z",
   "trigger": "workflow_dispatch",
   "taipeiDate": "2026-11-25",
   "keepFrom": "2026-09-27",
   "sources": [
     {
-      "id": "moa_fish",
-      "name": "漁產品批發交易行情",
-      "url": "https://data.moa.gov.tw/Service/OpenData/FromM/AquaticTransData.aspx",
+      "id": "moa_veg",
+      "name": "農產品（蔬菜）批發交易行情",
+      "url": "https://data.moa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx?StartDate=115.11.19&EndDate=115.11.25&TcType=N04",
       "http": 200,
-      "bytes": 2473642,
+      "bytes": 2484407,
       "ok": true,
+      "pages": [
+        9999,
+        1116
+      ],
       "contentType": "application/json; charset=utf-8",
-      "rows": 9999,
-      "parsed": 904,
-      "inWindow": 904,
-      "inserted": 904,
+      "rows": 11115,
+      "parsed": 1362,
+      "inWindow": 1362,
+      "inserted": 0,
       "changed": 0,
-      "unchanged": 0,
-      "latestBefore": null,
+      "unchanged": 1362,
+      "latestBefore": "2026-11-25",
       "latestInFile": "2026-11-25",
       "latestAfter": "2026-11-25",
-      "newData": true,
+      "newData": false,
       "excluded": 0,
-      "flaggedGroups": 4,
-      "rawFile": "raw/moa_fish/2026-11-25/2026-11-25T151738971Z-17747886af76.json",
+      "flaggedGroups": 0,
+      "rawFile": "raw/moa_veg/2026-11-25/2026-11-25T151830207Z-2b2dd48926b4.json",
       "duplicatesMerged": 0,
       "duplicateExamples": [],
       "unmappedMarkets": [],
-      "verdict": "有新訪價：最新日 null → 2026-11-25"
+      "verdict": "抓取成功，來源沒有新資料"
     }
   ],
   "pruned": 0
