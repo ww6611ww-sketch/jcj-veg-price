@@ -51,5 +51,28 @@
       "newData": true,
       "lastNewDataAt": "2026-11-25T14:54:51.753Z"
     }
+  },
+  "moa_fish": {
+    "scheduled": {
+      "httpStatus": 200,
+      "bytes": 2473642,
+      "trigger": "workflow_dispatch",
+      "lastAttemptAt": "2026-11-25T14:55:51.237Z",
+      "lastSuccessAt": "2026-11-25T14:55:51.237Z",
+      "lastError": null,
+      "latestDate": "2026-11-25",
+      "lastRawFile": "raw/moa_fish/2026-11-25/2026-11-25T145551237Z-17747886af76.json",
+      "lastCounts": {
+        "rows": 9999,
+        "parsed": 904,
+        "inWindow": 904,
+        "inserted": 841,
+        "changed": 63,
+        "unchanged": 0,
+        "updated": 63
+      },
+      "newData": true,
+      "lastNewDataAt": "2026-11-25T14:55:51.237Z"
+    }
   }
 }
