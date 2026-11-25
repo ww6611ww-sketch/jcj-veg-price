@@ -32,24 +32,24 @@
   "moa_veg": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 3162898,
+      "bytes": 2484407,
       "trigger": "workflow_dispatch",
-      "lastAttemptAt": "2026-11-25T14:59:55.810Z",
-      "lastSuccessAt": "2026-11-25T14:59:55.810Z",
+      "lastAttemptAt": "2026-11-25T15:16:36.953Z",
+      "lastSuccessAt": "2026-11-25T15:16:36.953Z",
       "lastError": null,
       "latestDate": "2026-11-25",
-      "lastRawFile": "raw/moa_veg/2026-11-25/2026-11-25T145955810Z-89af42da7d2c.json",
+      "lastRawFile": "raw/moa_veg/2026-11-25/2026-11-25T151636953Z-2b2dd48926b4.json",
       "lastCounts": {
-        "rows": 9999,
-        "parsed": 595,
-        "inWindow": 595,
-        "inserted": 0,
+        "rows": 11115,
+        "parsed": 1362,
+        "inWindow": 1362,
+        "inserted": 767,
         "changed": 0,
         "unchanged": 595,
         "updated": 595
       },
-      "newData": false,
-      "lastNewDataAt": "2026-11-25T14:54:51.753Z"
+      "newData": true,
+      "lastNewDataAt": "2026-11-25T15:16:36.953Z"
     }
   },
   "moa_fish": {
