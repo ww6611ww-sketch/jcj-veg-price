@@ -1,0 +1,117 @@
+{
+  "_note": "verified=true 只能在用官方原始檔核對欄位、有效報價、日期與單位後設定。exclusions 依 來源＋原始品名＋市場＋原始值 完全比對才排除，市場改報新值即重新判斷。",
+  "sources": [
+    {
+      "id": "taichung_retail",
+      "name": "臺中市公有零售市場每日價格",
+      "priceType": "retail",
+      "datasetPage": "https://data.gov.tw/dataset/84539",
+      "downloadUrl": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=495aff49-3547-4055-aacd-f0781c6f733e",
+      "downloadUrlStatus": "官方資料頁列出之 JSON 下載網址（使用者 2026-11-25 提供）",
+      "format": "JSON（陣列；每列一市場一日：市場名稱、訪價日期 YYYYMMDD、各品項欄，數值為字串）",
+      "rawUnit": "元/斤",
+      "zeroMeansMissing": true,
+      "verified": true,
+      "unitVerified": "部分：蔬菜依資料集說明「蔬果品項、平均價格(元/斤)」；海鮮、肉品欄單位待確認",
+      "verifiedAt": "2026-11-25",
+      "verifiedBy": "手動匯入官方 JSON（4,489 列，2025-11-26～2026-11-24）",
+      "verifiedItems": [
+        "cabbage",
+        "scallion",
+        "cauliflower",
+        "bokchoy",
+        "kangkong",
+        "carrot",
+        "onion",
+        "luffa"
+      ],
+      "pendingUnitItems": [
+        "whiteshrimp",
+        "clam",
+        "milkfish",
+        "barramundi",
+        "tilapia",
+        "threadfin",
+        "porkbelly",
+        "porkloin",
+        "porkham",
+        "beefshank",
+        "chicken",
+        "nativechicken"
+      ],
+      "exclusions": [
+        {
+          "market": "南屯市場",
+          "rawItemName": "白蝦",
+          "price": 7600,
+          "reason": "重複異常值：2025-11-26 起每日同值 7600，約當日中位數 26 倍；待提供機關確認",
+          "addedAt": "2026-11-25"
+        },
+        {
+          "market": "南屯市場",
+          "rawItemName": "文蛤",
+          "price": 2160,
+          "reason": "重複異常值：2025-11-26 起每日同值 2160，約當日中位數 17 倍；待提供機關確認",
+          "addedAt": "2026-11-25"
+        },
+        {
+          "market": "第五市場",
+          "rawItemName": "虱目魚",
+          "price": 1480,
+          "reason": "重複異常值：2025-11-26 起每日同值 1480，約當日中位數 12 倍；待提供機關確認",
+          "addedAt": "2026-11-25"
+        }
+      ]
+    },
+    {
+      "id": "moa_veg",
+      "name": "農產品（蔬菜）批發交易行情",
+      "priceType": "wholesale",
+      "datasetPage": "https://data.gov.tw/dataset/8066",
+      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx",
+      "downloadUrlStatus": "官方網址（使用者 2026-11-25 依官方資料頁提供）；日期查詢參數尚未驗證，先抓預設回傳",
+      "format": "JSON",
+      "rawUnit": "元/公斤",
+      "verified": false,
+      "unitVerified": false
+    },
+    {
+      "id": "moa_fish",
+      "name": "漁產品批發交易行情",
+      "priceType": "wholesale",
+      "datasetPage": "https://data.gov.tw/dataset/7299",
+      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/AquaticTransData.aspx",
+      "downloadUrlStatus": "官方網址（使用者 2026-11-25 依官方資料頁提供）；日期查詢參數尚未驗證，先抓預設回傳",
+      "format": "JSON",
+      "rawUnit": "元/公斤",
+      "verified": false,
+      "unitVerified": false
+    },
+    {
+      "id": "moa_hog",
+      "name": "毛豬交易行情",
+      "priceType": "hog_auction",
+      "datasetPage": "https://data.moa.gov.tw/open_detail.aspx?id=026",
+      "altPage": "https://data.gov.tw/dataset/7296",
+      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/AnimalTransData.aspx",
+      "downloadUrlStatus": "官方網址（使用者 2026-11-25 依官方資料頁提供）；日期查詢參數尚未驗證，先抓預設回傳",
+      "format": "JSON",
+      "rawUnit": "元/公斤（活體）",
+      "verified": false,
+      "unitVerified": false
+    },
+    {
+      "id": "moa_poultry",
+      "name": "家禽交易行情（白肉雞）",
+      "priceType": "poultry",
+      "datasetPage": "https://data.gov.tw/dataset/7536",
+      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/PoultryTransBoiledChickenData.aspx",
+      "downloadUrlStatus": "官方網址（使用者 2026-11-25 依官方資料頁提供）；日期查詢參數尚未驗證，先抓預設回傳",
+      "format": "JSON",
+      "rawUnit": "元/台斤",
+      "verified": false,
+      "unitVerified": true,
+      "unitNote": "7536 中文官方欄位明列元／台斤"
+    }
+  ]
+}

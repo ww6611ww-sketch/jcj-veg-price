@@ -1,0 +1,11 @@
+{
+  "taichung_retail": {
+    "manual": {
+      "lastAttemptAt": "2026-11-25T13:32:31.551Z",
+      "lastSuccessAt": "2026-11-25T13:32:31.551Z",
+      "lastError": null,
+      "latestDate": "2026-11-24",
+      "lastRawFile": "raw/taichung_retail/2026-11-25/2026-11-25T133231551Z-ca4d71f49203.json"
+    }
+  }
+}

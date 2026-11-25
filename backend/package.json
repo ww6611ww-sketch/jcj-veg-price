@@ -1,0 +1,2 @@
+{ "name": "jcj-backend", "version": "0.1.0", "private": true, "type": "module",
+  "scripts": { "pretest": "node scripts/gen-test-data.js", "test": "node --test test/*.test.js", "testdata": "node scripts/gen-test-data.js", "export": "node cli.js export" } }

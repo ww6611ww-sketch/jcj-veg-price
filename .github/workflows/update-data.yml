@@ -1,0 +1,40 @@
+# 官方抓取 → 匯入 → 輸出 App 正式資料 → 存回 repo（不部署網頁）
+# 排程：台灣時間 07:40、13:40、19:40（cron 以 UTC 表示）。手動執行可指定來源與日期。
+# 權限：工作流程預設不給任何權限，只有需要推送資料的 update 工作宣告 contents: write。
+name: 更新行情
+on:
+  schedule: [ { cron: '40 23,5,11 * * *' } ]
+  workflow_dispatch:
+    inputs:
+      only: { description: '只抓指定來源（逗號分隔；留空＝全部）例：taichung_retail', required: false, default: '' }
+      date: { description: '台灣日期 YYYY-MM-DD（留空＝今天）', required: false, default: '' }
+permissions: {}
+concurrency: { group: update-data, cancel-in-progress: false }
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    env: { TZ: Asia/Taipei, JCJ_TRIGGER: '${{ github.event_name }}', JCJ_KEEP_DAYS: '60' }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: 單元測試（測試資料於此產生，不提交）
+        run: cd backend && npm test
+      - name: 抓取並匯入（失敗的來源保留原資料，其他來源照常）
+        run: |
+          cd backend
+          node cli.js fetch ${{ inputs.only && format('--only {0}', inputs.only) || '' }} ${{ inputs.date && format('--date {0}', inputs.date) || '' }}
+      - name: 輸出 App 正式資料
+        run: cd backend && node cli.js export --datasets official
+      - name: 原始報價 ↔ App 匯出資料對照（清水第一市場／花椰菜最近一筆）
+        run: cd backend && node cli.js sample --source taichung_retail --market 清水第一市場 --item cauliflower --out data/official/sample.json
+      - name: 保存本次原始檔（Actions artifact，90 天；不進 repo）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: 'raw-${{ github.run_id }}', path: backend/data/official/raw/, retention-days: 90, if-no-files-found: ignore }
+      - name: 存回 repo
+        run: |
+          git config user.name 'jcj-bot'; git config user.email 'jcj-bot@users.noreply.github.com'
+          git add backend/data/official/records.json backend/data/official/status.json backend/data/official/last-run.json backend/data/official/sample.json app/www/data/official.json
+          if git diff --cached --quiet; then echo '資料沒有變動' | tee -a "$GITHUB_STEP_SUMMARY"; else git commit -m "data: $(date +%F_%H%M) (${{ github.event_name }})" && git pull --rebase && git push; fi

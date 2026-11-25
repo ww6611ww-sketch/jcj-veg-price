@@ -1,0 +1,13 @@
+node_modules/
+backend/data/*/raw/
+backend/data/test/
+backend/data/**/*.tmp
+app/android/.gradle/
+app/android/build/
+app/android/app/build/
+app/android/local.properties
+app/ios/App/build/
+.DS_Store
+# 模擬報價（測試資料）只在建置時產生，不納入 repo
+backend/fixtures/test-data/TEST_*
+app/www/data/test.json

@@ -1,0 +1,2 @@
+{ "appId": "tw.jcj.todaysvegprice", "appName": "今日菜價", "webDir": "www",
+  "android": { "backgroundColor": "#FAF7EF" }, "ios": { "backgroundColor": "#FAF7EF", "contentInset": "never" } }
