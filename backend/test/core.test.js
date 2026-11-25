@@ -208,7 +208,7 @@ test('同一份資料重跑：紀錄檔內容不變（不重寫抓取時間）',
 test('同檔重複列合併：有交易量按量加權', () => {
   const rows = [
     { 交易日期: '115.11.25', 品種代碼: '1', 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: '300', 交易量: '100' },
-    { 交易日期: '115.11.25', 品種代碼: '2', 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: '400', 交易量: '300' },
+    { 交易日期: '115.11.25', 品種代碼: '1', 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: '400', 交易量: '300' },
     { 交易日期: '115.11.25', 品種代碼: '1', 魚貨名稱: '白蝦', 市場名稱: '佳里', 平均價: '280', 交易量: '50' }];
   const { records, report } = parseSource('moa_fish', JSON.stringify(rows), { config: {} });
   assert.equal(records.length, 2);
@@ -217,4 +217,16 @@ test('同檔重複列合併：有交易量按量加權', () => {
   assert.equal(Math.round(tp.perKg), 375);
   assert.equal(report.duplicates.merged, 1);
   assert.equal(records.find(r => r.market === '佳里').region, 'south'); // 補對照
+});
+
+test('漁產：同名不同品種代碼不合併；午仔魚依代碼分規格', () => {
+  const rows = [
+    { 交易日期: '1151125', 品種代碼: 1272, 魚貨名稱: '午仔魚', 市場名稱: '台北', 平均價: 212.1, 交易量: 767.6 },
+    { 交易日期: '1151125', 品種代碼: 2271, 魚貨名稱: '午仔魚', 市場名稱: '台北', 平均價: 132.5, 交易量: 826.1 },
+    { 交易日期: '1151125', 品種代碼: 4015, 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: 300, 交易量: 10 }];
+  const { records, report } = parseSource('moa_fish', JSON.stringify(rows), { config: {} });
+  assert.equal(records.length, 3); assert.equal(report.duplicates.merged, 0);
+  assert.deepEqual(records.filter(r => r.itemId === 'threadfin').map(r => r.spec).sort(), ['品種代碼 1272', '品種代碼 2271']);
+  assert.equal(records.find(r => r.itemId === 'whiteshrimp').spec, '');
+  assert.equal(records[0].date, '2026-11-25');
 });

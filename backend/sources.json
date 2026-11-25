@@ -68,12 +68,16 @@
       "name": "農產品（蔬菜）批發交易行情",
       "priceType": "wholesale",
       "datasetPage": "https://data.gov.tw/dataset/8066",
-      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx",
-      "downloadUrlStatus": "官方網址；預設回傳最近約 4 天、上限 9,999 列。StartDate／EndDate（民國年）參數實測無效（回傳內容完全相同），正確的日期參數待核對官方 API 說明",
+      "downloadUrl": "https://data.moa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx?StartDate={rocStart}&EndDate={rocEnd}&TcType=N04",
+      "downloadUrlStatus": "官方網址；2026-11-25 診斷確認：StartDate／EndDate（民國年 115.11.19）有效、單次上限 9,999 列（新到舊）、$skip 可翻頁、TcType=N04 只取蔬菜；$top 大於 9,999 會出錯",
       "format": "JSON",
       "rawUnit": "元/公斤",
       "verified": false,
-      "unitVerified": false
+      "unitVerified": false,
+      "paging": {
+        "pageSize": 9999,
+        "maxPages": 10
+      }
     },
     {
       "id": "moa_fish",

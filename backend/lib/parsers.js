@@ -105,8 +105,10 @@ export function parseFishWholesale(rows) {
     const market = String(pick(row, '市場名稱', 'MarketName') ?? '').trim();
     const price = parsePrice(pick(row, '平均價', 'Avg_Price')); if (price == null) continue;
     const loc = lookupMarket(market); if (!loc) report.unmappedMarkets.add(market);
-    records.push(rec({ source: 'moa_fish', priceType: 'wholesale', itemId: it.id, rawItemName: name,
-      spec: name === it.fish.includes ? '' : name, // 不同規格（如「白蝦(大)」）分開比較
+    const code = String(pick(row, '品種代碼', 'FishCode') ?? '').trim();
+    const base = name === it.fish.includes || name === it.name ? '' : name; // 不同名稱規格（如「虱目魚肚」）分開比較
+    records.push(rec({ source: 'moa_fish', priceType: 'wholesale', itemId: it.id, rawItemName: code ? `${name}#${code}` : name, fishCode: code || null,
+      spec: it.fish.specByCode && code ? [base, `品種代碼 ${code}`].filter(Boolean).join(' ') : base, // 同名不同代碼（如午仔魚 1272／2271）分開比較
       market, county: loc?.county ?? null, region: loc?.region ?? null, date, price, rawUnit: '元/公斤',
       volume: parsePrice(pick(row, '交易量', 'Trans_Quantity')) }));
   }

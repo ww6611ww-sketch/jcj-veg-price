@@ -28,7 +28,7 @@ export const ITEMS = [
   { id: 'milkfish',    name: '虱目魚', cat: 'seafood', alias: [], taichung: ['虱目魚'], fish: { includes: '虱目魚' } },
   { id: 'barramundi',  name: '金目鱸', cat: 'seafood', alias: ['鱸魚'], taichung: ['金目鱸'], fish: { includes: '金目鱸' } },
   { id: 'tilapia',     name: '吳郭魚', cat: 'seafood', alias: ['台灣鯛'], taichung: ['吳郭魚'], fish: { includes: '吳郭魚' } },
-  { id: 'threadfin',   name: '午仔魚', cat: 'seafood', alias: [], taichung: ['午仔魚'], fish: { includes: '午仔' } },
+  { id: 'threadfin',   name: '午仔魚', cat: 'seafood', alias: [], taichung: ['午仔魚'], fish: { includes: '午仔', specByCode: true } }, // 同名兩個品種代碼（1272、2271）價差大，依代碼分開比較
   // 肉品（零售部位與活體分開）
   { id: 'porkbelly',   name: '五花肉', cat: 'meat', img: 'pork_belly', alias: ['三層肉'], taichung: ['五花肉'] },
   { id: 'porkloin',    name: '里肌肉', cat: 'meat', alias: [], taichung: ['里肌肉'] },

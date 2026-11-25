@@ -55,6 +55,13 @@ export class Store {
     if (removed) this.#write(next);
     return removed;
   }
+  /** 刪除符合條件的紀錄（一次性資料遷移用），回傳刪除筆數 */
+  purge(pred) {
+    const next = Object.fromEntries(Object.entries(this.records).filter(([, r]) => !pred(r)));
+    const removed = Object.keys(this.records).length - Object.keys(next).length;
+    if (removed) this.#write(next);
+    return removed;
+  }
   latestDate(source) { return Object.values(this.records).reduce((m, r) => (r.source === source && !r.excluded && r.date > m ? r.date : m), '') || null; }
   #write(next) {
     // 一筆一行、依鍵排序：仍是合法 JSON，git 每日只存差異

@@ -62,10 +62,26 @@ async function main() {
       r.url = (process.env['JCJ_URL_' + s.id] || s.downloadUrl).replace('{rocStart}', rocDate(days[0])).replace('{rocEnd}', rocDate(days.at(-1)));
       let text;
       try {
-        const res = await fetch(r.url, { signal: AbortSignal.timeout(90000), headers: { 'User-Agent': 'jcj-veg-price/0.1 (+opendata)' } });
-        r.http = res.status; r.contentType = res.headers.get('content-type');
-        text = await res.text(); r.bytes = Buffer.byteLength(text);
-        if (!res.ok) throw new Error(`HTTP ${res.status}：${text.slice(0, 200).replace(/\s+/g, ' ')}`);
+        const one = async u => {
+          const res = await fetch(u, { signal: AbortSignal.timeout(90000), headers: { 'User-Agent': 'jcj-veg-price/0.1 (+opendata)' } });
+          r.http = res.status; r.contentType = res.headers.get('content-type');
+          const t = await res.text();
+          if (!res.ok) throw new Error(`HTTP ${res.status}：${t.slice(0, 200).replace(/\s+/g, ' ')}`);
+          return t;
+        };
+        if (s.paging) {
+          // 官方每次最多回 pageSize 列（新到舊），以 $skip 翻頁直到不足一頁
+          const all = []; r.pages = [];
+          for (let p = 0; p < (s.paging.maxPages || 10); p++) {
+            const u = `${r.url}${r.url.includes('?') ? '&' : '?'}$top=${s.paging.pageSize}&$skip=${p * s.paging.pageSize}`;
+            const arr = JSON.parse((await one(u)).replace(/^\uFEFF/, ''));
+            if (!Array.isArray(arr)) throw new Error('分頁回傳不是陣列');
+            all.push(...arr); r.pages.push(arr.length);
+            if (arr.length < s.paging.pageSize) break;
+          }
+          text = JSON.stringify(all);
+        } else text = await one(r.url);
+        r.bytes = Buffer.byteLength(text);
       } catch (e) {
         // 抓取失敗：records.json 不動 → 保留最後一次有效資料
         fail(`抓取失敗：${e.message}${e.cause ? `（${[e.cause.code, e.cause.message].filter(Boolean).join(' ')}）` : ''}`);
@@ -89,6 +105,13 @@ async function main() {
     fs.writeFileSync(path.join(DATA, 'official', 'last-run.json'), JSON.stringify(report, null, 2));
     for (const r of report.sources) console.log(r.id, r.ok ? 'OK' : 'FAIL', r.http ?? '-', r.verdict || r.error);
     if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, runSummary(report));
+    return;
+  }
+  if (cmd === 'purge') {
+    // 一次性遷移：node cli.js purge --source moa_fish --legacy-fish
+    const store = new Store(DATA, 'official');
+    const n = store.purge(r => r.source === args.source && (!('legacy-fish' in args) || !String(r.rawItemName).includes('#')));
+    console.log('purged', n);
     return;
   }
   if (cmd === 'prune') {
