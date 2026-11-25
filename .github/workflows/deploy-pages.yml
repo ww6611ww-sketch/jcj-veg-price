@@ -41,3 +41,17 @@ jobs:
       - name: 網頁資料與 repo 一致，並對照一筆原始報價
         env: { URL: '${{ needs.deploy.outputs.url }}data/official.json' }
         run: sleep 20 && node backend/scripts/verify-pages.mjs "$URL"
+      - name: 實際開啟網頁（無頭 Chrome）確認比價頁顯示同一筆報價
+        env: { SITE: '${{ needs.deploy.outputs.url }}' }
+        run: |
+          google-chrome --version
+          google-chrome --headless=new --no-sandbox --disable-gpu --window-size=390,844 --virtual-time-budget=15000 --dump-dom "${SITE}#compare-cauliflower" > page.html
+          node -e "
+            const fs=require('fs');const h=fs.readFileSync('page.html','utf8');
+            const text=h.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+            const sm=JSON.parse(fs.readFileSync('backend/data/official/sample.json','utf8'));
+            const i=text.indexOf(sm.market);const seg=i<0?'':text.slice(i,i+80);
+            const want=String(sm.appData['元每台斤']);
+            const out={標題:(h.match(/<title>([^<]*)/)||[])[1],比價列:seg.trim(),預期價格:want,顯示正確:seg.includes(' '+want+' ')||seg.includes('>'+want+'<')||new RegExp('\\\\b'+want+'\\\\s*元／台斤').test(seg)};
+            console.log(out);fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\n## 網頁實際畫面\n\n'+Object.entries(out).map(([k,v])=>'- '+k+'：'+v).join('\n')+'\n');
+            if(!out.顯示正確)process.exit(1);"
