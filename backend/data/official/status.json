@@ -6,6 +6,27 @@
       "lastError": null,
       "latestDate": "2026-11-24",
       "lastRawFile": "raw/taichung_retail/2026-11-25/2026-11-25T133231551Z-ca4d71f49203.json"
+    },
+    "scheduled": {
+      "httpStatus": 200,
+      "bytes": 5370110,
+      "trigger": "workflow_dispatch",
+      "lastAttemptAt": "2026-11-25T13:51:20.955Z",
+      "lastSuccessAt": "2026-11-25T13:51:20.955Z",
+      "lastError": null,
+      "latestDate": "2026-11-24",
+      "lastRawFile": "raw/taichung_retail/2026-11-25/2026-11-25T135120955Z-ca4d71f49203.json",
+      "lastCounts": {
+        "rows": 4489,
+        "parsed": 78139,
+        "inWindow": 13090,
+        "inserted": 0,
+        "changed": 0,
+        "unchanged": 13090,
+        "updated": 13090
+      },
+      "newData": false,
+      "lastNewDataAt": null
     }
   }
 }

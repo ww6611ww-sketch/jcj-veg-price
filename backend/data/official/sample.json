@@ -1,0 +1,20 @@
+{
+  "market": "清水第一市場",
+  "item": "cauliflower",
+  "date": "2026-11-24",
+  "rawNote": "原始檔 raw/taichung_retail/2026-11-25/2026-11-25T133231551Z-ca4d71f49203.json 不在本機（存於該次執行的 artifact）",
+  "raw": null,
+  "stored": {
+    "date": "2026-11-24",
+    "price": 42,
+    "rawUnit": "元/斤",
+    "fetchedAt": "2026-11-25T13:32:31.551Z",
+    "via": "manual",
+    "rawFile": "raw/taichung_retail/2026-11-25/2026-11-25T133231551Z-ca4d71f49203.json"
+  },
+  "appData": {
+    "元每台斤": 42,
+    "元每公斤": 70,
+    "資料日": "2026-11-24"
+  }
+}
