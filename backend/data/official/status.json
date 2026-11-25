@@ -57,21 +57,21 @@
       "httpStatus": 200,
       "bytes": 2473642,
       "trigger": "workflow_dispatch",
-      "lastAttemptAt": "2026-11-25T15:17:38.971Z",
-      "lastSuccessAt": "2026-11-25T15:17:38.971Z",
+      "lastAttemptAt": "2026-11-25T15:19:35.207Z",
+      "lastSuccessAt": "2026-11-25T15:19:35.207Z",
       "lastError": null,
       "latestDate": "2026-11-25",
-      "lastRawFile": "raw/moa_fish/2026-11-25/2026-11-25T151738971Z-17747886af76.json",
+      "lastRawFile": "raw/moa_fish/2026-11-25/2026-11-25T151935207Z-17747886af76.json",
       "lastCounts": {
         "rows": 9999,
         "parsed": 904,
         "inWindow": 904,
-        "inserted": 904,
+        "inserted": 0,
         "changed": 0,
-        "unchanged": 0,
-        "updated": 0
+        "unchanged": 904,
+        "updated": 904
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-25T15:17:38.971Z"
     }
   },
