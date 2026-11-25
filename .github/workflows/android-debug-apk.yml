@@ -1,4 +1,5 @@
-# Android 測試版 APK（debug 簽署，可側載，不需 Google Play 帳號）
+# Android 測試版 APK：建置 → 模擬器實測（連線／斷網）→ 發布預先版本供手機下載
+# debug 簽署，可側載，不需 Google Play 帳號。權限由各工作單獨宣告。
 name: Android 測試版 APK
 on: { workflow_dispatch: {} }
 permissions: {}
@@ -6,6 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions: { contents: read }
+    outputs: { data_base: '${{ steps.cfg.outputs.data_base }}' }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -15,14 +17,72 @@ jobs:
       - uses: android-actions/setup-android@v3
       - name: 產生測試資料預覽檔
         run: bash backend/scripts/build-test-export.sh
-      - name: 指向已部署的資料網址（App 開啟時抓最新行情，連不到時用內附資料）
+      - name: 線上行情來源指向已部署的 GitHub Pages
+        id: cfg
         run: |
           OWNER='${{ github.repository_owner }}'; REPO='${{ github.event.repository.name }}'
-          if [ '${{ vars.ENABLE_PAGES }}' = 'true' ]; then echo "window.JCJ_DATA_BASE = 'https://${OWNER,,}.github.io/${REPO}/data';" > app/www/config.js; fi
-          cat app/www/config.js
+          if [ '${{ vars.ENABLE_PAGES }}' != 'true' ]; then echo 'ENABLE_PAGES 未開啟，App 只能用內附資料' >&2; exit 1; fi
+          BASE="https://${OWNER,,}.github.io/${REPO}/data"
+          echo "window.JCJ_DATA_BASE = '${BASE}';" > app/www/config.js
+          echo "data_base=${BASE}" >> "$GITHUB_OUTPUT"
+          curl -fsS "${BASE}/official.json" -o /tmp/o.json && node -e "const d=require('/tmp/o.json');console.log('Pages 資料可讀：',d.generatedAt)"
+          { echo "## APK 設定"; echo "- 線上行情來源：${BASE}/official.json"; echo "- 內附資料：app/www/data/official.json（$(node -e "console.log(require('./app/www/data/official.json').generatedAt)")）"; } >> "$GITHUB_STEP_SUMMARY"
       - name: 建置
         run: |
           cd app && npm ci && npx cap sync android
+          grep -q "JCJ_DATA_BASE" android/app/src/main/assets/public/config.js && cat android/app/src/main/assets/public/config.js
           cd android && chmod +x gradlew && ./gradlew assembleDebug
+          ls -la app/build/outputs/apk/debug/
+          mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/jcj-v0.1.0-debug.apk
       - uses: actions/upload-artifact@v4
-        with: { name: 'jcj-v0.1.0-debug-apk', path: app/android/app/build/outputs/apk/debug/app-debug.apk }
+        with: { name: 'jcj-v0.1.0-debug-apk', path: app/android/app/build/outputs/apk/debug/jcj-v0.1.0-debug.apk }
+  emulator-test:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: { contents: read }
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with: { name: 'jcj-v0.1.0-debug-apk' }
+      - name: 啟用 KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: 讀取 Pages 目前資料（比對 App 是否真的線上取得）
+        id: exp
+        run: |
+          curl -fsS '${{ needs.build.outputs.data_base }}/official.json' -o /tmp/o.json
+          echo "gen=$(node -e "console.log(require('/tmp/o.json').generatedAt)")" >> "$GITHUB_OUTPUT"
+          echo "latest=$(node -e "const d=require('/tmp/o.json');console.log((d.sources||[]).map(s=>s.latestDate).filter(Boolean).sort().at(-1))")" >> "$GITHUB_OUTPUT"
+      - name: Android 14 模擬器：安裝並實測連線／斷網
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: bash scripts/android-e2e.sh jcj-v0.1.0-debug.apk '${{ steps.exp.outputs.gen }}' '${{ steps.exp.outputs.latest }}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: 'emulator-e2e', path: 'e2e-*', if-no-files-found: ignore }
+  release:
+    needs: [build, emulator-test]
+    if: always() && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: 'jcj-v0.1.0-debug-apk' }
+      - name: 發布預先版本（手機可直接下載 APK）
+        env: { GH_TOKEN: '${{ github.token }}', REPO: '${{ github.repository }}' }
+        run: |
+          TAG=v0.1.0-apk-test
+          NOTE="今日菜價 v0.1.0 Android 測試版（debug 簽署，側載安裝）。線上行情：${{ needs.build.outputs.data_base }}/official.json；連不到時使用 App 內附資料。模擬器實測：${{ needs.emulator-test.result }}。建置執行：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh release view "$TAG" -R "$REPO" >/dev/null 2>&1 || gh release create "$TAG" -R "$REPO" --prerelease --title "今日菜價 v0.1.0 Android 測試版" --notes "$NOTE" --target '${{ github.sha }}'
+          gh release edit "$TAG" -R "$REPO" --notes "$NOTE"
+          gh release upload "$TAG" jcj-v0.1.0-debug.apk -R "$REPO" --clobber
+          echo "- APK 下載：${{ github.server_url }}/${{ github.repository }}/releases/download/${TAG}/jcj-v0.1.0-debug.apk" >> "$GITHUB_STEP_SUMMARY"

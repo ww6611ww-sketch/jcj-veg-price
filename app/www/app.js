@@ -132,6 +132,7 @@
     else body = `${!has.length && !q ? `<div class="notice">${esc(d.regions[S.region])}目前沒有已驗證的來源（正式行情只接通台中菜市場訪價）。</div>` : ''}<div class="list">${has.map(itemRow).join('')}</div>${none.length ? `<div class="section-t">此地區暫無報價</div><div class="list">${none.map(itemRow).join('')}</div>` : ''}`;
     return `${testBar()}
       <header class="home-head"><img src="img/basket.webp" alt=""><h1>今日菜價</h1>${d.isTest ? '<span class="badge test">測試資料</span>' : ''}</header>
+      ${originBar()}
       <div class="seg regions" role="group" aria-label="地區">${regions}</div>
       <label class="search">${ICON.search}<span class="sr">搜尋食材</span><input type="search" id="q" placeholder="搜尋食材" value="${esc(S.q)}" enterkeyhint="search" autocomplete="off"></label>
       <div class="cats" role="group" aria-label="分類">${cats}</div>
@@ -231,7 +232,7 @@
     const bg = document.createElement('div');
     bg.className = 'sheet-bg';
     bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="資料來源"><h2>資料來源與狀態</h2>
-      <p class="meta">目前顯示：${D().isTest ? '測試資料（虛構價格）' : '正式行情'}</p>${sourceList()}
+      <p class="meta">目前顯示：${D().isTest ? '測試資料（虛構價格）' : '正式行情'}${S.origin === 'online' ? '・線上取得' : S.origin === 'bundled' ? '・App 內附（離線）' : ''}</p>${sourceList()}
       ${S.data.test ? `<label class="switch"><span>預覽測試資料</span><input type="checkbox" id="modeSw" ${S.mode === 'test' ? 'checked' : ''}></label>` : ''}
       <p class="meta">測試資料只用來檢查畫面與計算，與正式行情分開存放，不會混入。</p>
       <button class="btn secondary" style="width:100%;margin-top:10px" data-act="close">關閉</button></div>`;
@@ -275,6 +276,7 @@
     else if (t.dataset.act === 'sort') { S.sortAsc = !S.sortAsc; route(); }
     else if (t.dataset.act === 'sources') openSources();
     else if (t.dataset.act === 'mode-test') setMode('test');
+    else if (t.dataset.act === 'reload') { t.textContent = '連線中…'; load(); }
   });
   S.depth = 0;
   window.addEventListener('hashchange', () => { S.depth++; route(); window.scrollTo(0, 0); });
@@ -285,17 +287,28 @@
     App?.addListener('backButton', () => { const h = location.hash; if (!h || h === '#') App.exitApp(); else { const id = (h.match(/^#compare-([a-z]+)$/) || [])[1]; location.hash = id ? `#item-${id}` : ''; } });
   } catch {}
 
+  // 資料來源：online＝已部署網址的最新行情；bundled＝連不到時改用 App 內附資料；site＝網頁版同網址資料
   async function load() {
-    // 遠端資料網址（共用後端每日輸出）；未設定或連不到時用 App 內附資料
     const REMOTE = window.JCJ_DATA_BASE || '';
-    const tryGet = async u => { try { const r = await fetch(u, { cache: 'no-store' }); return r.ok ? r.json() : null; } catch { return null; } };
-    const get = async f => (REMOTE && f === 'official' && await tryGet(`${REMOTE}/${f}.json`)) || tryGet(`data/${f}.json`);
-    const [o, t] = await Promise.all([get('official'), get('test')]);
+    const tryGet = async (u, ms = 8000) => { try { const r = await fetch(u, { cache: 'no-store', signal: AbortSignal.timeout(ms) }); return r.ok ? r.json() : null; } catch { return null; } };
+    let o = null;
+    if (REMOTE) { o = await tryGet(`${REMOTE}/official.json`); S.origin = o ? 'online' : 'bundled'; S.remoteTriedAt = new Date().toISOString(); }
+    if (!o) { o = await tryGet('data/official.json'); if (!REMOTE) S.origin = 'site'; }
+    const t = await tryGet('data/test.json');
     S.data.official = o || { dataset: 'official', isTest: false, aggs: [], quotes: [], items: t?.items || [], sources: [], regions: t?.regions, priceTypes: t?.priceTypes, categories: t?.categories };
     S.data.test = t;
     if (S.mode === 'test' && !t) S.mode = 'official';
     route();
   }
-  window.__jcj = { S, version: VERSION };
+  // 行情來源提示：只在 App（有設定線上網址）顯示
+  function originBar() {
+    const d = S.data.official; if (!d || D()?.isTest || S.origin === 'site' || !S.origin) return '';
+    const lat = (d.sources || []).map(s => s.latestDate).filter(Boolean).sort().at(-1);
+    const gen = d.generatedAt ? new Date(d.generatedAt).toLocaleString('zh-TW', { timeZone: 'Asia/Taipei', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }) : '—';
+    return S.origin === 'online'
+      ? `<div class="originbar ok" data-origin="online">線上行情・更新於 ${gen}${lat ? `・最近訪價日 ${md(lat)}` : ''}</div>`
+      : `<div class="originbar off" data-origin="bundled" role="status"><b>目前無法連線，顯示 App 內附資料</b><br>資料產生於 ${gen}${lat ? `・最近訪價日 ${md(lat)}` : ''}<br><button class="linkbtn" data-act="reload">重新連線</button></div>`;
+  }
+  window.__jcj = { S, version: VERSION, reload: () => load() };
   load();
 })();

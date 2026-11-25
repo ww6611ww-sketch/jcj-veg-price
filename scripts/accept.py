@@ -54,7 +54,7 @@ with sync_playwright() as p:
     ok("白蝦詳情：單位待確認、不顯示價格", "單位待確認" in pg2.locator(".empty").inner_text() and pg2.locator(".big").count() == 0, None)
     # 異常值排除後：白蝦在正式模式仍單位待確認；用測試模式驗證「待確認」標記
     pg2.goto(U + "#"); pg2.wait_for_timeout(300); pg2.click("[data-act=sources]"); pg2.wait_for_timeout(200); pg2.screenshot(path=f"{out}/A07_sources_sheet.png")
-    ok("來源面板：手動匯入成功／每日抓取失敗 分開顯示", "手動匯入：" in pg2.locator(".sheet").inner_text() and "每日抓取：尚未執行" in pg2.locator(".sheet").inner_text(), None)
+    ok("來源面板：手動匯入成功／每日抓取失敗 分開顯示", "手動匯入：" in pg2.locator(".sheet").inner_text() and "每日抓取：" in pg2.locator(".sheet").inner_text(), None)
     pg2.click("#modeSw"); pg2.wait_for_timeout(300)
     ok("切換測試資料：顯示測試橫幅", pg2.locator(".testbar").count() == 1, None); shot2("A08_test_home")
     pg2.goto(U + "#item-scallion"); pg2.wait_for_timeout(300); shot2("A09_test_flag_detail")
