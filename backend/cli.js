@@ -76,7 +76,8 @@ async function main() {
           extra: { httpStatus: r.http, bytes: r.bytes, trigger } });
         Object.assign(r, { ok: x.records > 0, rows: x.rows, parsed: x.parsed, inWindow: x.inWindow, inserted: x.inserted, changed: x.changed,
           unchanged: x.unchanged, latestBefore: x.latestBefore, latestInFile: x.latestInFile, latestAfter: x.latestAfter, newData: x.newData,
-          excluded: x.report.excludedCount ?? 0, flaggedGroups: x.report.flagged?.length ?? 0, rawFile: x.rawFile });
+          excluded: x.report.excludedCount ?? 0, flaggedGroups: x.report.flagged?.length ?? 0, rawFile: x.rawFile,
+          duplicatesMerged: x.report.duplicates?.merged ?? 0, duplicateExamples: x.report.duplicates?.examples ?? [], unmappedMarkets: x.report.unmappedMarkets ?? [] });
         r.verdict = !x.records ? '抓取成功，但原始檔沒有可用報價（保留先前資料）'
           : x.newData ? (x.latestAfter > (x.latestBefore || '') ? `有新訪價：最新日 ${x.latestBefore} → ${x.latestAfter}` : '有新增或更正的報價（最新日未變）')
           : '抓取成功，來源沒有新資料';
