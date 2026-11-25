@@ -1,0 +1,13 @@
+# 只讀診斷（不寫入 repo、不部署）：測試農業部 API 參數、抽查資料結構
+name: 診斷（只讀）
+on: { workflow_dispatch: {} }
+permissions: {}
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/diagnose-moa.mjs
