@@ -103,21 +103,21 @@
       "httpStatus": 200,
       "bytes": 1502662,
       "trigger": "workflow_dispatch",
-      "lastAttemptAt": "2026-11-25T14:58:11.517Z",
-      "lastSuccessAt": "2026-11-25T14:58:11.517Z",
+      "lastAttemptAt": "2026-11-25T15:03:14.018Z",
+      "lastSuccessAt": "2026-11-25T15:03:14.018Z",
       "lastError": null,
       "latestDate": "2026-11-24",
-      "lastRawFile": "raw/moa_poultry/2026-11-25/2026-11-25T145811517Z-9714bb3ccd94.json",
+      "lastRawFile": "raw/moa_poultry/2026-11-25/2026-11-25T150314018Z-9714bb3ccd94.json",
       "lastCounts": {
         "rows": 5915,
-        "parsed": 17486,
-        "inWindow": 225,
-        "inserted": 177,
+        "parsed": 17360,
+        "inWindow": 177,
+        "inserted": 0,
         "changed": 0,
-        "unchanged": 48,
-        "updated": 48
+        "unchanged": 177,
+        "updated": 177
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-25T14:58:11.517Z"
     }
   }
