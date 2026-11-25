@@ -204,3 +204,17 @@ test('同一份資料重跑：紀錄檔內容不變（不重寫抓取時間）',
   assert.equal(fs.readFileSync(st.file, 'utf8'), before);
   assert.equal(st.status.taichung_retail.scheduled.lastSuccessAt, '2026-11-25T06:00:00Z');
 });
+
+test('同檔重複列合併：有交易量按量加權', () => {
+  const rows = [
+    { 交易日期: '115.11.25', 品種代碼: '1', 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: '300', 交易量: '100' },
+    { 交易日期: '115.11.25', 品種代碼: '2', 魚貨名稱: '白蝦', 市場名稱: '台北', 平均價: '400', 交易量: '300' },
+    { 交易日期: '115.11.25', 品種代碼: '1', 魚貨名稱: '白蝦', 市場名稱: '佳里', 平均價: '280', 交易量: '50' }];
+  const { records, report } = parseSource('moa_fish', JSON.stringify(rows), { config: {} });
+  assert.equal(records.length, 2);
+  const tp = records.find(r => r.market === '台北');
+  assert.equal(tp.price, 375); assert.equal(tp.mergedFrom, 2); assert.equal(tp.volume, 400);
+  assert.equal(Math.round(tp.perKg), 375);
+  assert.equal(report.duplicates.merged, 1);
+  assert.equal(records.find(r => r.market === '佳里').region, 'south'); // 補對照
+});

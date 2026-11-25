@@ -40,7 +40,7 @@ export class Store {
     for (const r of records) {
       const k = Store.key(r), old = next[k];
       if (!old) inserted++;
-      else if (old.price !== r.price || (old.excluded ?? null) !== (r.excluded ?? null) || (old.flag ?? null) !== (r.flag ?? null)) changed++;
+      else if (old.price !== r.price || (old.excluded ?? null) !== (r.excluded ?? null) || (old.flag ?? null) !== (r.flag ?? null) || (old.region ?? null) !== (r.region ?? null) || (old.county ?? null) !== (r.county ?? null) || (old.spec ?? '') !== (r.spec ?? '')) changed++;
       else { unchanged++; continue; } // 完全相同：保留原紀錄（含首次取得時間與原始檔），避免每次抓取都改寫檔案
       next[k] = { ...r, ...meta, dataset: this.dataset };
     }

@@ -55,11 +55,35 @@ export function flagHighPrices(records) {
   return flagged;
 }
 
+/**
+ * 同一份原始檔內同鍵（來源＋日期＋市場＋原始品名＋價格類型）重複的列：合併成一筆。
+ * 有交易量時按交易量加權平均，否則取平均；報告記錄合併筆數與範例。
+ */
+export function mergeDuplicates(records, report) {
+  const g = new Map();
+  for (const r of records) { const k = [r.source, r.date, r.market, r.rawItemName, r.priceType].join('|'); if (!g.has(k)) g.set(k, []); g.get(k).push(r); }
+  const out = []; const examples = []; let merged = 0;
+  for (const rs of g.values()) {
+    if (rs.length === 1) { out.push(rs[0]); continue; }
+    merged += rs.length - 1;
+    const prices = rs.map(r => r.price), vols = rs.map(r => r.volume || 0), vsum = vols.reduce((a, b) => a + b, 0);
+    const price = vsum > 0 ? rs.reduce((a, r) => a + r.price * (r.volume || 0), 0) / vsum : prices.reduce((a, b) => a + b, 0) / prices.length;
+    const p = Math.round(price * 100) / 100;
+    const allSame = prices.every(x => x === prices[0]);
+    if (examples.length < 5 && !allSame) examples.push({ date: rs[0].date, market: rs[0].market, item: rs[0].rawItemName, prices, volumes: vols, merged: p });
+    out.push({ ...rs[0], price: allSame ? prices[0] : p, perKg: rs[0].perKg == null ? null : (allSame ? rs[0].perKg : rs[0].perKg / rs[0].price * p), volume: vsum || rs[0].volume, mergedFrom: rs.length });
+  }
+  report.duplicates = { merged, examples };
+  return out;
+}
+
 export function parseSource(source, text, opts = {}) {
   const parser = PARSERS[source];
   if (!parser) throw new Error(`未知來源 ${source}`);
   const rows = toRows(text);
-  const { records, report } = parser(rows, opts);
+  const parsed = parser(rows, opts);
+  const report = parsed.report;
+  const records = mergeDuplicates(parsed.records, report);
   const cfg = opts.config ?? sourceConfig(source);
   report.excludedCount = applyExclusions(records, cfg.exclusions);
   report.excluded = summarizeGroups(records.filter(r => r.excluded), 'excluded');
