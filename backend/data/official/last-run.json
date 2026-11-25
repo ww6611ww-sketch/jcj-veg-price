@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-11-25T13:52:56.549Z",
+  "runAt": "2026-11-25T14:02:47.954Z",
   "trigger": "workflow_dispatch",
   "taipeiDate": "2026-11-25",
   "keepFrom": "2026-09-27",
@@ -24,7 +24,7 @@
       "newData": false,
       "excluded": 1088,
       "flaggedGroups": 1,
-      "rawFile": "raw/taichung_retail/2026-11-25/2026-11-25T135256549Z-ca4d71f49203.json",
+      "rawFile": "raw/taichung_retail/2026-11-25/2026-11-25T140247954Z-ca4d71f49203.json",
       "verdict": "抓取成功，來源沒有新資料"
     }
   ],
