@@ -34,21 +34,21 @@
       "httpStatus": 200,
       "bytes": 3162898,
       "trigger": "workflow_dispatch",
-      "lastAttemptAt": "2026-11-25T14:54:51.753Z",
-      "lastSuccessAt": "2026-11-25T14:54:51.753Z",
+      "lastAttemptAt": "2026-11-25T14:59:55.810Z",
+      "lastSuccessAt": "2026-11-25T14:59:55.810Z",
       "lastError": null,
       "latestDate": "2026-11-25",
-      "lastRawFile": "raw/moa_veg/2026-11-25/2026-11-25T145451753Z-89af42da7d2c.json",
+      "lastRawFile": "raw/moa_veg/2026-11-25/2026-11-25T145955810Z-89af42da7d2c.json",
       "lastCounts": {
         "rows": 9999,
         "parsed": 595,
         "inWindow": 595,
-        "inserted": 595,
+        "inserted": 0,
         "changed": 0,
-        "unchanged": 0,
-        "updated": 0
+        "unchanged": 595,
+        "updated": 595
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-25T14:54:51.753Z"
     }
   },
