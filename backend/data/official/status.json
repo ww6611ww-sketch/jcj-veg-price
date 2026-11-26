@@ -9,70 +9,70 @@
     },
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 5378507,
+      "bytes": 5388090,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T00:29:43.451Z",
-      "lastSuccessAt": "2026-11-26T00:29:43.451Z",
+      "lastAttemptAt": "2026-11-26T06:33:33.443Z",
+      "lastSuccessAt": "2026-11-26T06:33:33.443Z",
       "lastError": null,
-      "latestDate": "2026-11-25",
-      "lastRawFile": "raw/taichung_retail/2026-11-26/2026-11-26T002943451Z-effeafca028e.json",
+      "latestDate": "2026-11-26",
+      "lastRawFile": "raw/taichung_retail/2026-11-26/2026-11-26T063333443Z-d1a72cb74c22.json",
       "lastCounts": {
-        "rows": 4496,
-        "parsed": 78255,
-        "inWindow": 13202,
-        "inserted": 341,
+        "rows": 4504,
+        "parsed": 78402,
+        "inWindow": 13349,
+        "inserted": 147,
         "changed": 0,
-        "unchanged": 12861,
-        "updated": 12861
+        "unchanged": 13202,
+        "updated": 13202
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-26T00:29:43.451Z"
+      "lastNewDataAt": "2026-11-26T06:33:33.443Z"
     }
   },
   "moa_veg": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 2098565,
+      "bytes": 2159736,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T00:29:58.461Z",
-      "lastSuccessAt": "2026-11-26T00:29:58.461Z",
+      "lastAttemptAt": "2026-11-26T06:33:45.021Z",
+      "lastSuccessAt": "2026-11-26T06:33:45.021Z",
       "lastError": null,
       "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_veg/2026-11-26/2026-11-26T002958461Z-d6b36950de50.json",
+      "lastRawFile": "raw/moa_veg/2026-11-26/2026-11-26T063345021Z-bae5528d68c6.json",
       "lastCounts": {
-        "rows": 9389,
-        "parsed": 1155,
-        "inWindow": 1155,
-        "inserted": 26,
+        "rows": 9662,
+        "parsed": 1193,
+        "inWindow": 1193,
+        "inserted": 38,
         "changed": 0,
-        "unchanged": 1129,
-        "updated": 1129
+        "unchanged": 1155,
+        "updated": 1155
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-26T00:29:58.461Z"
+      "lastNewDataAt": "2026-11-26T06:33:45.021Z"
     }
   },
   "moa_fish": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 2473980,
+      "bytes": 2474095,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T00:30:05.323Z",
-      "lastSuccessAt": "2026-11-26T00:30:05.323Z",
+      "lastAttemptAt": "2026-11-26T06:34:00.967Z",
+      "lastSuccessAt": "2026-11-26T06:34:00.967Z",
       "lastError": null,
       "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_fish/2026-11-26/2026-11-26T003005323Z-f345af934b32.json",
+      "lastRawFile": "raw/moa_fish/2026-11-26/2026-11-26T063400967Z-83eebba0de0a.json",
       "lastCounts": {
         "rows": 9999,
-        "parsed": 921,
-        "inWindow": 921,
-        "inserted": 49,
+        "parsed": 926,
+        "inWindow": 926,
+        "inserted": 7,
         "changed": 0,
-        "unchanged": 872,
-        "updated": 872
+        "unchanged": 919,
+        "updated": 919
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-26T00:30:05.323Z"
+      "lastNewDataAt": "2026-11-26T06:34:00.967Z"
     }
   },
   "moa_hog": {
@@ -80,11 +80,11 @@
       "httpStatus": 200,
       "bytes": 15719605,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T00:30:22.527Z",
-      "lastSuccessAt": "2026-11-26T00:30:22.527Z",
+      "lastAttemptAt": "2026-11-26T06:34:08.053Z",
+      "lastSuccessAt": "2026-11-26T06:34:08.053Z",
       "lastError": null,
       "latestDate": "2026-11-25",
-      "lastRawFile": "raw/moa_hog/2026-11-26/2026-11-26T003022527Z-aaaa953244f3.json",
+      "lastRawFile": "raw/moa_hog/2026-11-26/2026-11-26T063408053Z-aaaa953244f3.json",
       "lastCounts": {
         "rows": 9999,
         "parsed": 37079,
@@ -101,24 +101,24 @@
   "moa_poultry": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 1502662,
+      "bytes": 1502918,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T00:30:50.691Z",
-      "lastSuccessAt": "2026-11-26T00:30:50.691Z",
+      "lastAttemptAt": "2026-11-26T06:35:06.584Z",
+      "lastSuccessAt": "2026-11-26T06:35:06.584Z",
       "lastError": null,
-      "latestDate": "2026-11-24",
-      "lastRawFile": "raw/moa_poultry/2026-11-26/2026-11-26T003050691Z-9714bb3ccd94.json",
+      "latestDate": "2026-11-25",
+      "lastRawFile": "raw/moa_poultry/2026-11-26/2026-11-26T063506584Z-77daf95862df.json",
       "lastCounts": {
-        "rows": 5915,
-        "parsed": 17360,
-        "inWindow": 174,
-        "inserted": 0,
+        "rows": 5916,
+        "parsed": 17363,
+        "inWindow": 177,
+        "inserted": 3,
         "changed": 0,
         "unchanged": 174,
         "updated": 174
       },
-      "newData": false,
-      "lastNewDataAt": "2026-11-25T14:58:11.517Z"
+      "newData": true,
+      "lastNewDataAt": "2026-11-26T06:35:06.584Z"
     }
   }
 }

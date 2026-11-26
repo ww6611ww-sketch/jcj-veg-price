@@ -1,24 +1,24 @@
 {
   "market": "清水第一市場",
   "item": "cauliflower",
-  "date": "2026-11-25",
-  "rawFile": "raw/taichung_retail/2026-11-26/2026-11-26T002943451Z-effeafca028e.json",
+  "date": "2026-11-26",
+  "rawFile": "raw/taichung_retail/2026-11-26/2026-11-26T063333443Z-d1a72cb74c22.json",
   "raw": {
     "市場名稱": "清水第一市場",
-    "訪價日期": "20261125",
+    "訪價日期": "20261126",
     "花椰菜": "42"
   },
   "stored": {
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "price": 42,
     "rawUnit": "元/斤",
-    "fetchedAt": "2026-11-26T00:29:43.451Z",
+    "fetchedAt": "2026-11-26T06:33:33.443Z",
     "via": "scheduled",
-    "rawFile": "raw/taichung_retail/2026-11-26/2026-11-26T002943451Z-effeafca028e.json"
+    "rawFile": "raw/taichung_retail/2026-11-26/2026-11-26T063333443Z-d1a72cb74c22.json"
   },
   "appData": {
     "元每台斤": 42,
     "元每公斤": 70,
-    "資料日": "2026-11-25"
+    "資料日": "2026-11-26"
   }
 }
