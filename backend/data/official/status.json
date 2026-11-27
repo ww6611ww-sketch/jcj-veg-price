@@ -9,70 +9,70 @@
     },
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 5388090,
+      "bytes": 5376114,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T12:41:20.628Z",
-      "lastSuccessAt": "2026-11-26T12:41:20.628Z",
+      "lastAttemptAt": "2026-11-27T00:32:56.927Z",
+      "lastSuccessAt": "2026-11-27T00:32:56.927Z",
       "lastError": null,
-      "latestDate": "2026-11-26",
-      "lastRawFile": "raw/taichung_retail/2026-11-26/2026-11-26T124120628Z-d1a72cb74c22.json",
+      "latestDate": "2026-11-27",
+      "lastRawFile": "raw/taichung_retail/2026-11-27/2026-11-27T003256927Z-f0245f7370fd.json",
       "lastCounts": {
-        "rows": 4504,
-        "parsed": 78402,
-        "inWindow": 13349,
-        "inserted": 0,
+        "rows": 4494,
+        "parsed": 78222,
+        "inWindow": 13180,
+        "inserted": 45,
         "changed": 0,
-        "unchanged": 13349,
-        "updated": 13349
+        "unchanged": 13135,
+        "updated": 13135
       },
-      "newData": false,
-      "lastNewDataAt": "2026-11-26T06:33:33.443Z"
+      "newData": true,
+      "lastNewDataAt": "2026-11-27T00:32:56.927Z"
     }
   },
   "moa_veg": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 2159736,
+      "bytes": 1904938,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T12:41:36.679Z",
-      "lastSuccessAt": "2026-11-26T12:41:36.679Z",
+      "lastAttemptAt": "2026-11-27T00:33:08.424Z",
+      "lastSuccessAt": "2026-11-27T00:33:08.424Z",
       "lastError": null,
-      "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_veg/2026-11-26/2026-11-26T124136679Z-bae5528d68c6.json",
+      "latestDate": "2026-11-27",
+      "lastRawFile": "raw/moa_veg/2026-11-27/2026-11-27T003308424Z-b06d9ef0b062.json",
       "lastCounts": {
-        "rows": 9662,
-        "parsed": 1193,
-        "inWindow": 1193,
-        "inserted": 0,
-        "changed": 0,
-        "unchanged": 1193,
-        "updated": 1193
+        "rows": 8519,
+        "parsed": 1055,
+        "inWindow": 1055,
+        "inserted": 99,
+        "changed": 1,
+        "unchanged": 955,
+        "updated": 956
       },
-      "newData": false,
-      "lastNewDataAt": "2026-11-26T06:33:45.021Z"
+      "newData": true,
+      "lastNewDataAt": "2026-11-27T00:33:08.424Z"
     }
   },
   "moa_fish": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 2473943,
+      "bytes": 2474018,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T12:41:50.503Z",
-      "lastSuccessAt": "2026-11-26T12:41:50.503Z",
+      "lastAttemptAt": "2026-11-27T00:33:20.984Z",
+      "lastSuccessAt": "2026-11-27T00:33:20.984Z",
       "lastError": null,
-      "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_fish/2026-11-26/2026-11-26T124150503Z-0f28abe8512a.json",
+      "latestDate": "2026-11-27",
+      "lastRawFile": "raw/moa_fish/2026-11-27/2026-11-27T003320984Z-fe5897e9cd56.json",
       "lastCounts": {
         "rows": 9999,
-        "parsed": 927,
-        "inWindow": 927,
-        "inserted": 4,
+        "parsed": 925,
+        "inWindow": 925,
+        "inserted": 54,
         "changed": 0,
-        "unchanged": 923,
-        "updated": 923
+        "unchanged": 871,
+        "updated": 871
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-26T12:41:50.503Z"
+      "lastNewDataAt": "2026-11-27T00:33:20.984Z"
     }
   },
   "moa_hog": {
@@ -80,21 +80,21 @@
       "httpStatus": 200,
       "bytes": 15719601,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T12:42:00.846Z",
-      "lastSuccessAt": "2026-11-26T12:42:00.846Z",
+      "lastAttemptAt": "2026-11-27T00:33:33.557Z",
+      "lastSuccessAt": "2026-11-27T00:33:33.557Z",
       "lastError": null,
       "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_hog/2026-11-26/2026-11-26T124200846Z-b0259454d26d.json",
+      "lastRawFile": "raw/moa_hog/2026-11-27/2026-11-27T003333557Z-b0259454d26d.json",
       "lastCounts": {
         "rows": 9999,
         "parsed": 37079,
-        "inWindow": 3559,
-        "inserted": 4,
+        "inWindow": 3496,
+        "inserted": 0,
         "changed": 0,
-        "unchanged": 3555,
-        "updated": 3555
+        "unchanged": 3496,
+        "updated": 3496
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-26T12:42:00.846Z"
     }
   },
@@ -103,19 +103,19 @@
       "httpStatus": 200,
       "bytes": 1502918,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-26T12:42:23.633Z",
-      "lastSuccessAt": "2026-11-26T12:42:23.633Z",
+      "lastAttemptAt": "2026-11-27T00:34:32.970Z",
+      "lastSuccessAt": "2026-11-27T00:34:32.970Z",
       "lastError": null,
       "latestDate": "2026-11-25",
-      "lastRawFile": "raw/moa_poultry/2026-11-26/2026-11-26T124223633Z-77daf95862df.json",
+      "lastRawFile": "raw/moa_poultry/2026-11-27/2026-11-27T003432970Z-77daf95862df.json",
       "lastCounts": {
         "rows": 5916,
         "parsed": 17363,
-        "inWindow": 177,
+        "inWindow": 174,
         "inserted": 0,
         "changed": 0,
-        "unchanged": 177,
-        "updated": 177
+        "unchanged": 174,
+        "updated": 174
       },
       "newData": false,
       "lastNewDataAt": "2026-11-26T06:35:06.584Z"
