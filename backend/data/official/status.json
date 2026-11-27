@@ -11,11 +11,11 @@
       "httpStatus": 200,
       "bytes": 5376114,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-27T06:35:31.596Z",
-      "lastSuccessAt": "2026-11-27T06:35:31.596Z",
+      "lastAttemptAt": "2026-11-27T12:38:33.485Z",
+      "lastSuccessAt": "2026-11-27T12:38:33.485Z",
       "lastError": null,
       "latestDate": "2026-11-27",
-      "lastRawFile": "raw/taichung_retail/2026-11-27/2026-11-27T063531596Z-f0245f7370fd.json",
+      "lastRawFile": "raw/taichung_retail/2026-11-27/2026-11-27T123833485Z-f0245f7370fd.json",
       "lastCounts": {
         "rows": 4494,
         "parsed": 78222,
@@ -34,68 +34,68 @@
       "httpStatus": 200,
       "bytes": 2157578,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-27T06:35:51.681Z",
-      "lastSuccessAt": "2026-11-27T06:35:51.681Z",
+      "lastAttemptAt": "2026-11-27T12:38:53.312Z",
+      "lastSuccessAt": "2026-11-27T12:38:53.312Z",
       "lastError": null,
       "latestDate": "2026-11-27",
-      "lastRawFile": "raw/moa_veg/2026-11-27/2026-11-27T063551681Z-3f5b6b137301.json",
+      "lastRawFile": "raw/moa_veg/2026-11-27/2026-11-27T123853312Z-3f5b6b137301.json",
       "lastCounts": {
         "rows": 9650,
         "parsed": 1185,
         "inWindow": 1185,
-        "inserted": 130,
-        "changed": 14,
-        "unchanged": 1041,
-        "updated": 1055
+        "inserted": 0,
+        "changed": 0,
+        "unchanged": 1185,
+        "updated": 1185
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-27T06:35:51.681Z"
     }
   },
   "moa_fish": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 2474266,
+      "bytes": 2474102,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-27T06:36:11.948Z",
-      "lastSuccessAt": "2026-11-27T06:36:11.948Z",
+      "lastAttemptAt": "2026-11-27T12:39:01.359Z",
+      "lastSuccessAt": "2026-11-27T12:39:01.359Z",
       "lastError": null,
       "latestDate": "2026-11-27",
-      "lastRawFile": "raw/moa_fish/2026-11-27/2026-11-27T063611948Z-0c54ca7070a5.json",
+      "lastRawFile": "raw/moa_fish/2026-11-27/2026-11-27T123901359Z-4ffc109699ab.json",
       "lastCounts": {
         "rows": 9999,
-        "parsed": 924,
-        "inWindow": 924,
-        "inserted": 36,
-        "changed": 1,
-        "unchanged": 887,
-        "updated": 888
+        "parsed": 918,
+        "inWindow": 918,
+        "inserted": 4,
+        "changed": 0,
+        "unchanged": 914,
+        "updated": 914
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-27T06:36:11.948Z"
+      "lastNewDataAt": "2026-11-27T12:39:01.359Z"
     }
   },
   "moa_hog": {
     "scheduled": {
       "httpStatus": 200,
-      "bytes": 15719597,
+      "bytes": 15719660,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-27T06:36:29.685Z",
-      "lastSuccessAt": "2026-11-27T06:36:29.685Z",
+      "lastAttemptAt": "2026-11-27T12:39:17.345Z",
+      "lastSuccessAt": "2026-11-27T12:39:17.345Z",
       "lastError": null,
-      "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_hog/2026-11-27/2026-11-27T063629685Z-8fe5e5072d9d.json",
+      "latestDate": "2026-11-27",
+      "lastRawFile": "raw/moa_hog/2026-11-27/2026-11-27T123917345Z-dfff9028e925.json",
       "lastCounts": {
         "rows": 9999,
-        "parsed": 37084,
-        "inWindow": 3564,
+        "parsed": 37086,
+        "inWindow": 3632,
         "inserted": 68,
         "changed": 0,
-        "unchanged": 3496,
-        "updated": 3496
+        "unchanged": 3564,
+        "updated": 3564
       },
       "newData": true,
-      "lastNewDataAt": "2026-11-27T06:36:29.685Z"
+      "lastNewDataAt": "2026-11-27T12:39:17.345Z"
     }
   },
   "moa_poultry": {
@@ -103,21 +103,21 @@
       "httpStatus": 200,
       "bytes": 1503174,
       "trigger": "schedule",
-      "lastAttemptAt": "2026-11-27T06:37:43.778Z",
-      "lastSuccessAt": "2026-11-27T06:37:43.778Z",
+      "lastAttemptAt": "2026-11-27T12:39:50.744Z",
+      "lastSuccessAt": "2026-11-27T12:39:50.744Z",
       "lastError": null,
       "latestDate": "2026-11-26",
-      "lastRawFile": "raw/moa_poultry/2026-11-27/2026-11-27T063743778Z-1e02176676eb.json",
+      "lastRawFile": "raw/moa_poultry/2026-11-27/2026-11-27T123950744Z-1e02176676eb.json",
       "lastCounts": {
         "rows": 5917,
         "parsed": 17366,
         "inWindow": 177,
-        "inserted": 3,
+        "inserted": 0,
         "changed": 0,
-        "unchanged": 174,
-        "updated": 174
+        "unchanged": 177,
+        "updated": 177
       },
-      "newData": true,
+      "newData": false,
       "lastNewDataAt": "2026-11-27T06:37:43.778Z"
     }
   }
