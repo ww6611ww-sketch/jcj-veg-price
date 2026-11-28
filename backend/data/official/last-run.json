@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-11-28T00:28:36.752Z",
+  "runAt": "2026-11-28T06:35:37.793Z",
   "trigger": "schedule",
   "taipeiDate": "2026-11-28",
   "keepFrom": "2026-09-30",
@@ -15,20 +15,20 @@
       "rows": 4488,
       "parsed": 78127,
       "inWindow": 13068,
-      "inserted": 130,
+      "inserted": 0,
       "changed": 0,
-      "unchanged": 12938,
+      "unchanged": 13068,
       "latestBefore": "2026-11-27",
       "latestInFile": "2026-11-27",
       "latestAfter": "2026-11-27",
-      "newData": true,
+      "newData": false,
       "excluded": 1087,
       "flaggedGroups": 1,
-      "rawFile": "raw/taichung_retail/2026-11-28/2026-11-28T002836752Z-871874750623.json",
+      "rawFile": "raw/taichung_retail/2026-11-28/2026-11-28T063537793Z-871874750623.json",
       "duplicatesMerged": 0,
       "duplicateExamples": [],
       "unmappedMarkets": [],
-      "verdict": "有新增或更正的報價（最新日未變）"
+      "verdict": "抓取成功，來源沒有新資料"
     },
     {
       "id": "moa_veg",
@@ -44,20 +44,20 @@
       "rows": 7860,
       "parsed": 959,
       "inWindow": 959,
-      "inserted": 18,
+      "inserted": 0,
       "changed": 0,
-      "unchanged": 941,
+      "unchanged": 959,
       "latestBefore": "2026-11-27",
       "latestInFile": "2026-11-27",
       "latestAfter": "2026-11-27",
-      "newData": true,
+      "newData": false,
       "excluded": 0,
       "flaggedGroups": 0,
-      "rawFile": "raw/moa_veg/2026-11-28/2026-11-28T002850594Z-b3945b459c93.json",
+      "rawFile": "raw/moa_veg/2026-11-28/2026-11-28T063550683Z-b3945b459c93.json",
       "duplicatesMerged": 0,
       "duplicateExamples": [],
       "unmappedMarkets": [],
-      "verdict": "有新增或更正的報價（最新日未變）"
+      "verdict": "抓取成功，來源沒有新資料"
     },
     {
       "id": "moa_fish",
@@ -70,20 +70,20 @@
       "rows": 9999,
       "parsed": 934,
       "inWindow": 934,
-      "inserted": 26,
+      "inserted": 0,
       "changed": 0,
-      "unchanged": 908,
-      "latestBefore": "2026-11-27",
+      "unchanged": 934,
+      "latestBefore": "2026-11-28",
       "latestInFile": "2026-11-28",
       "latestAfter": "2026-11-28",
-      "newData": true,
+      "newData": false,
       "excluded": 0,
       "flaggedGroups": 4,
-      "rawFile": "raw/moa_fish/2026-11-28/2026-11-28T002856466Z-4ac48813ce4e.json",
+      "rawFile": "raw/moa_fish/2026-11-28/2026-11-28T063605132Z-4ac48813ce4e.json",
       "duplicatesMerged": 0,
       "duplicateExamples": [],
       "unmappedMarkets": [],
-      "verdict": "有新訪價：最新日 2026-11-27 → 2026-11-28"
+      "verdict": "抓取成功，來源沒有新資料"
     },
     {
       "id": "moa_hog",
@@ -105,7 +105,7 @@
       "newData": false,
       "excluded": 0,
       "flaggedGroups": 0,
-      "rawFile": "raw/moa_hog/2026-11-28/2026-11-28T002911904Z-dfff9028e925.json",
+      "rawFile": "raw/moa_hog/2026-11-28/2026-11-28T063625774Z-dfff9028e925.json",
       "duplicatesMerged": 0,
       "duplicateExamples": [],
       "unmappedMarkets": [
@@ -133,12 +133,12 @@
       "newData": false,
       "excluded": 0,
       "flaggedGroups": 0,
-      "rawFile": "raw/moa_poultry/2026-11-28/2026-11-28T002941105Z-1e02176676eb.json",
+      "rawFile": "raw/moa_poultry/2026-11-28/2026-11-28T063722570Z-1e02176676eb.json",
       "duplicatesMerged": 126,
       "duplicateExamples": [],
       "unmappedMarkets": [],
       "verdict": "抓取成功，來源沒有新資料"
     }
   ],
-  "pruned": 318
+  "pruned": 0
 }
